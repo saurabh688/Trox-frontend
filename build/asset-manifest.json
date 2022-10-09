@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.46af25f0.css",
+    "main.js": "/static/js/main.caf7c950.js",
+    "static/media/banner_image_4.jpg": "/static/media/banner_image_4.5bd291a268c1aaadd9d0.jpg",
+    "static/media/trox.png": "/static/media/trox.188c545faae5bed5467d.png",
+    "static/media/banner_image_2.jpg": "/static/media/banner_image_2.491b4bdc2749369b3e0e.jpg",
+    "static/media/banner_image_3.jpg": "/static/media/banner_image_3.3782c0798972962dee65.jpg",
+    "static/media/banner_image_1.jpg": "/static/media/banner_image_1.092658d7c50fadb641b6.jpg",
+    "index.html": "/index.html",
+    "main.46af25f0.css.map": "/static/css/main.46af25f0.css.map",
+    "main.caf7c950.js.map": "/static/js/main.caf7c950.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46af25f0.css",
+    "static/js/main.caf7c950.js"
+  ]
+}
