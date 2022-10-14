@@ -1,44 +1,28 @@
+import "./style.css";
 import Header from "../../layout/header/Header";
 import Product from "../../components/home/Product";
-import "./Home.css";
 import BannerSlider from "../../components/home/BannerSlider.js";
-
+import { useState } from "react";
 import React, { useEffect } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
-const Home = () => {
-  const [searchValue, setSearchValue] = useState(null);
-  const [detailedProducts, setDetailedProducts] = useState([]);
-  let navigate = useNavigate();
 
-  const search = (e) => {
-    if (e.key === "Enter") {
-      navigate("/products");
-    }
-  };
-
-  useEffect(async () => {
-    if (searchValue !== "" || searchValue !== null) {
-      let uri = `http://52.54.44.196:4000/api/v1/product/searchProduct/?value=${searchValue}`;
-      try {
-        const res = await axios.get(uri);
-        setDetailedProducts(res.data.data.slice(0, 20));
-        return res.data;
-      } catch (e) {
-        throw e;
+const Support = () => {
+    const [searchValue, setSearchValue] = useState(null);
+    const [detailedProducts, setDetailedProducts] = useState([]);
+    let navigate = useNavigate();
+  
+    const search = (e) => {
+      if (e.key === "Enter") {
+        navigate("/products");
       }
-    } else {
-      setDetailedProducts([]);
-    }
-  }, [searchValue]);
-
+    };
   return (
     <>
-      <nav className="header">
+       <nav className="header">
         {/* add trox logo instead of amazon */}
         {/* importing local image from folder src={require('../assets/banner_image/banner_image_1.jpg')}*/}
         <Link to="/" className="header__link">
@@ -91,28 +75,18 @@ const Home = () => {
           </div>
         </Link>
       </nav>
-      {/* <Header/> */}
-      <div className="home">
-        <BannerSlider />
-        {/* add categories here */}
-        {/* <div className="home__row"> */}
-        {detailedProducts.length
-          ? detailedProducts.map((item) => (
-              <Product
-                id={item?.id}
-                title={item?.title}
-                price={item?.price}
-                brand={item?.brand}
-                desc={item?.description}
-                rating={5}
-                image="https://m.media-amazon.com/images/I/61O9tWR6WDS._SX522_.jpg"
-              />
-            ))
-          : null}
-        {/* </div> */}
-      </div>
+    <div className="container-1">
+      <h1>Mail To US at</h1>
+      <br />
+      <h2>
+        {" "}
+        <a style={{ textAlign: "left" }} href="mailto:info@paysfer.com">
+          info@trox.com
+        </a>
+      </h2>
+    </div>
     </>
   );
 };
 
-export default Home;
+export default Support;

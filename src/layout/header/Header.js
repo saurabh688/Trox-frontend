@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,22 @@ const Header = () => {
 
         }
     }
+    const updateQueryStringParameter =(uri, key, value)=> {
+        var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+        var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+        if (uri.match(re)) {
+          return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+        else {
+          return uri + separator + key + "=" + value;
+        }
+      }
+    useEffect(()=>{
+
+        updateQueryStringParameter('http://52.54.44.196:3000/','search',searchValue)
+
+      
+    },[searchValue])
 
     return (
         <nav className="header">

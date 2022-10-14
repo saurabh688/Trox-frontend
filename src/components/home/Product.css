@@ -1,5 +1,5 @@
 .product {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     max-height: 400px;
     min-width: 100px;
@@ -8,6 +8,7 @@
     z-index: 1;
     width: 100%;
     padding: 20px;
+    max-width: 400px;
     justify-content: flex-end;
 }
 
