@@ -1,4 +1,4 @@
-Welcome to Trox webpage!!!
+Welcome to Trox webpage!!
 
 # Getting Started with Create React App
 
