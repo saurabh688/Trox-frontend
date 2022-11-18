@@ -60,9 +60,10 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <Link to="/checkout" className="header__link">
+      <Link to="/cart" className="header__link">
         <div className="header__optionCart">
-          <span className="header__optionTwo header__cartCount">2</span>
+        <span className="header__optionOne"></span>
+            <span className="header__optionTwo">Cart</span>
         </div>
       </Link>
     </nav>
