@@ -3,6 +3,7 @@ const ROUTE_PATHS = {
   LOGIN: "/login",
   LISTING: "/listing",
   PRODUCT_DETAILS: "/product-details",
+  ORDER: "/order",
   CART: "/cart",
 };
 
