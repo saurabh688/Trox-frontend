@@ -1,3 +1,4 @@
+import Cart from "../pages/cart/Cart";
 import Home from "../pages/home/Home";
 import Listing from "../pages/lisitng/Listing";
 import Login from "../pages/login/Login";
@@ -25,6 +26,11 @@ const routes: route[] = [
   {
     path: ROUTE_PATHS.PRODUCT_DETAILS,
     component: <ProductDetails />,
+    exact: true,
+  },
+  {
+    path: ROUTE_PATHS.CART,
+    component: <Cart />,
     exact: true,
   },
 ];

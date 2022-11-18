@@ -3,6 +3,7 @@ const ROUTE_PATHS = {
   LOGIN: "/login",
   LISTING: "/listing",
   PRODUCT_DETAILS: "/product-details",
+  CART: "/cart",
 };
 
 export default ROUTE_PATHS;

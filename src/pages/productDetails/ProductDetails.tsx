@@ -1,12 +1,32 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BuyableProduct } from "../../types";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
   const { state } = useLocation();
+  let navigate = useNavigate();
   const [productDetailsValue, setProductDetailsValue] =
     useState<BuyableProduct>();
+
+  const addToCart = () => {
+    let cartValue = [];
+    let savedCart = window.localStorage.getItem("cart");
+    console.log(savedCart)
+
+    if (savedCart && savedCart !== null && savedCart !== 'undefined') {
+      let tempdata = JSON.parse(savedCart);
+      console.log(tempdata)
+      cartValue.push(tempdata);
+      cartValue.push(productDetailsValue);
+      window.localStorage.setItem("cart", JSON.stringify(cartValue));
+    } else {
+      window.localStorage.setItem("cart", JSON.stringify(productDetailsValue));
+    }
+
+    navigate("/cart", { state: { productDetailsValue } });
+  };
+
   useEffect(() => {
     console.log("statat", state);
     if (
@@ -75,7 +95,8 @@ const ProductDetails = () => {
                   <b> Returns:</b>&nbsp;
                 </span>{" "}
                 30 days return policy <br />
-              </div><br/>
+              </div>
+              <br />
               <div
                 style={{
                   marginBottom: "10px",
@@ -99,11 +120,12 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
-                  <br/><br/>
+          <br />
+          <br />
           {/* <!-- Product Pricing --> */}
           <div className="product-price">
             <span>{productDetailsValue?.salePrice}</span>
-            <a href="#" className="cart-btn">
+            <a href="#" className="cart-btn" onClick={addToCart}>
               Add to cart
             </a>
           </div>
