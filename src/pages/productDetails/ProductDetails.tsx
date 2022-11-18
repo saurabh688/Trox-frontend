@@ -24,7 +24,7 @@ const ProductDetails = () => {
       window.localStorage.setItem("cart", JSON.stringify(productDetailsValue));
     }
 
-    navigate("/cart", { state: { productDetailsValue } });
+    // navigate("/cart", { state: { productDetailsValue } });
   };
 
   useEffect(() => {
