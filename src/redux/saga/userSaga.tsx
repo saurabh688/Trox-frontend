@@ -3,6 +3,7 @@ import { call, takeLatest, put } from "redux-saga/effects";
 import {
   checkEmail,
   getCountryCode,
+  resendEmailVerificationLink,
   signIn,
   signUp,
   verifyEmailOTP,
@@ -22,6 +23,9 @@ import {
   verifyEmailOTPSuccess,
   signupStartSuccess,
   verifyEmailOTPFailure,
+  resendEmailOTPStart,
+  resendEmailOTPSuccess,
+  resendEmailOTPFailure,
 } from "../reduxSlice/user";
 // import { clearWishListData, getWishListItemsStart } from "redux/wishlist";
 import {
@@ -42,6 +46,7 @@ function* userSagaWatcher() {
       getUserStart.type,
       signupStartStart.type,
       verifyEmailOTPStart.type,
+      resendEmailOTPStart.type,
     ],
     userWorker
   );
@@ -116,21 +121,26 @@ function* userWorker(action: any): any {
           const res = yield call(verifyEmailOTP, action.payload);
           yield put(setLoading({ loading: false }));
           if (res.success) {
-            yield put(verifyEmailOTPSuccess());
+            yield put(verifyEmailOTPSuccess(res));
           } else {
 
             yield put(verifyEmailOTPFailure({ res }));
           }
-
-          // const { history } = action.payload;
-          // const res = yield call(verifyEmailOTP, action.payload);
-          // yield put(verifyEmailOTPSuccess());
-          // if (res.ResponseBody.emailVerified) {
-          //   snack.success("Email is verified successfully");
-          //   history.push("/signin");
-          // }
         }
         break;
+        case resendEmailOTPStart.type:
+          {
+            yield put(setLoading({ loading: true }));
+            const res = yield call(resendEmailVerificationLink, action.payload);
+            yield put(setLoading({ loading: false }));
+            if (res.success) {
+              yield put(resendEmailOTPSuccess());
+            } else {
+  
+              yield put(resendEmailOTPFailure({ res }));
+            }
+          }
+          break;
 
       // eslint-disable-next-line no-lone-blocks
       case logoutStart.type:

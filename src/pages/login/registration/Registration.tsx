@@ -16,7 +16,7 @@ const Registration = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isnavigate, setIsnavigate] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const userData = useSelector((state: RootState) => state.user);
 
   const submit = (event: any) => {
     event.preventDefault();
@@ -31,19 +31,19 @@ const Registration = () => {
   };
 
   useEffect(() => {
-    console.log("user", user);
+    console.log("user", userData);
     if (isnavigate) {
-      console.log(user.register);
-      if (user.register == null) {
-        if (!!user.message) alert(user.message);
+      console.log(userData.user);
+      if (userData.user == null) {
+        if (!!userData.message) alert(userData.message);
       } else {
-        if (user.register) {
+        if (userData.user) { 
           navigate("/verification");
           
         }
       }
     }
-  }, [user]);
+  }, [userData]);
   return (
     <div className="registraion-container">
       <div className="registraion-layout">

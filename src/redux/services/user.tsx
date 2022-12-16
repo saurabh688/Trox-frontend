@@ -77,10 +77,10 @@ const tokenVerification = async (token: object) => {
   }
 }
 
-const resendEmailVerificationLink = async (email: object) => {
-  let uri = 'user/resend-email';
+const resendEmailVerificationLink = async (data: object) => {
+  let uri = baseURL+'/resendOTP';
   try {
-    const res = await axios.post(uri, email);
+    const res = await axios.post(uri, data);
     return res.data;
   } catch (e){
     throw e;
@@ -128,14 +128,14 @@ const subscribeNewLetter = async (data: any) => {
 }
 
 const verifyEmailOTP = async (data:any) => {
-  let uri = baseURL+'user/email-verification';
+  let uri = baseURL+'user/verify';
   try {
     const res = await axios.post(uri, data);
     console.log('verifyEmailOTP',res.data)
 
     return res.data;
   } catch (e:any){
-    console.log('verifyEmailOTP',e.response)
+    console.log('verifyEmailOTPfail',e.response)
     return e.response;
   }
 }

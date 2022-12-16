@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccessToken } from "../../utils/auth";
+import { getAccessToken, setAccessToken, setRefreshToken } from "../../utils/auth";
 
 interface State {
   isLoading: boolean;
   loggedIn: boolean;
-  register: any | null;
+  user: any | null;
   error?: boolean;
   message?: string;
   accessToken?: string | null;
-  user?: any;
   loggedOut?: boolean;
   // verified?: boolean;
   // appVerifier?: any;
@@ -18,11 +17,10 @@ interface State {
 const initialState: State = {
   isLoading: false,
   loggedIn: false,
-  register: null,
+  user: null,
   accessToken: getAccessToken() || null,
   error: false,
   message: "",
-  user: {},
   loggedOut: true,
   // verified: false,
   // emailVerificationSigninErr: false,
@@ -103,7 +101,7 @@ export const userSlice = createSlice({
       return{
       ...initialState,
       isLoading: false,
-      register: value,
+      user: value,
       message: msg,
       error: false,
     }},
@@ -113,7 +111,7 @@ export const userSlice = createSlice({
       return{
       ...initialState,
       isLoading: false,
-      register: null,
+      user: null,
       error: true,
       message: msg,
     }},
@@ -127,11 +125,31 @@ export const userSlice = createSlice({
       ...state,
       isLoading: true
     }),
-    verifyEmailOTPSuccess: (state: State) => ({
+    verifyEmailOTPSuccess: (state: State,action) => {
+      console.log(action.payload.data)
+      setAccessToken(action.payload.data.accessToken)
+      setRefreshToken(action.payload.data.refreshTokenObject)
+      return{
+      ...state,
+      loggedIn:true,
+      isLoading: false
+    }},
+    verifyEmailOTPFailure: (state: State, action) => ({
+      ...state,
+      isLoading: false,
+      error: true
+    }),
+    resendEmailOTPStart: (state: State) => ({
+      ...state,
+      isLoading: true
+    }),
+    resendEmailOTPSuccess: (state: State) => {
+      
+      return {
       ...state,
       isLoading: false
-    }),
-    verifyEmailOTPFailure: (state: State, action) => ({
+    }},
+    resendEmailOTPFailure: (state: State, action) => ({
       ...state,
       isLoading: false,
       error: true
@@ -155,5 +173,8 @@ export const {
   verifyEmailOTPStart,
   verifyEmailOTPFailure,
   verifyEmailOTPSuccess,
+  resendEmailOTPStart,
+  resendEmailOTPFailure,
+  resendEmailOTPSuccess,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,14 +1,23 @@
 import { Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { verifyEmailOTPStart } from "../../../redux/reduxSlice/user";
 import { RootState } from "../../../redux/store";
 import "./Registration.css";
 
 const RegistrarionOtp = () => {
+  let navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
+  const userData = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    console.log("useruseruser", userData);
+    if(userData.loggedIn){
+      navigate("/")
+    }
+  }, [userData]);
 
   return (
     <div className="registraion-container">
@@ -36,9 +45,10 @@ const RegistrarionOtp = () => {
             variant="contained"
             style={{ width: "100%" }}
             onClick={() => {
+              console.log("useruser", userData);
               dispatch(
                 verifyEmailOTPStart({
-                  userId: user.register.id,
+                  userId: userData.user.id,
                   otp: otp,
                 })
               );
@@ -54,12 +64,12 @@ const RegistrarionOtp = () => {
             variant="text"
             style={{ width: "100%" }}
             onClick={() => {
-              // dispatch(
-              //   verifyEmailOTPStart({
-              //     userId: user.register.id,
-              //     emailId: user.register.id,
-              //   })
-              // );
+              dispatch(
+                verifyEmailOTPStart({
+                  userId: userData.user.id,
+                  emailId: userData.user.emailId,
+                })
+              );
             }}
           >
             Resend OTP
