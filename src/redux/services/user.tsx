@@ -38,7 +38,7 @@ const signUpSeller = async (signupData : IUser) => {
 
 export const signIn = async (signupData : SignInUser) => {
   console.log('signupData',signupData)
-  let uri = '/signIn';
+  let uri = baseURL+'/signIn';
   try {
     const res = await axios.post(uri, signupData);
     return res.data;

@@ -87,7 +87,11 @@ const Listing = () => {
     };
 
     setProduct(data);
-    console.log("data", data);
+    console.log("data", {
+      ...product,
+      listingStatus: "Live",
+      userId: userData.user["_id"],
+    });
     e.preventDefault();
     dispatch(
       createProductStart({
@@ -99,7 +103,7 @@ const Listing = () => {
       })
     );
     setTimeout(() => {
-      navigate("/");
+      // navigate("/");
     }, 1000);
   };
 
@@ -147,30 +151,30 @@ const Listing = () => {
 
   return (
     <>
-      <div id="content" className="content--desktop">
-        <div className="view">
+      <div id="content" className="listing-content--desktop">
+        <div className="listing-view">
           <form onSubmit={submitForm}>
             <div>
-              <div className="card card--large">
-                <h1 className="p--b--5 fw--light">Create Your Listing</h1>
-                <section className="listing-editor__section">
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+              <div className="listing-card card--large">
+                <h1 className="listing-p--b--5 fw--light">Create Your Listing</h1>
+                <section className="listing-listing-editor__section">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         <p id="red">* </p>Photos &amp; Video
                       </div>
-                      {/* <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      {/* <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add up to 6 photos.
                       </p> */}
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       <div
                         id="imagePlaceholder"
                         data-et-name="listingEditorImageSection"
                       >
                         <div>
-                          <label className="d--b">
-                            <div className="">
+                          <label className="listing-d--b">
+                            <div className="listing-">
                               <input
                                 id="img-file-input"
                                 name="img-file-input"
@@ -178,7 +182,7 @@ const Listing = () => {
                                 aria-label="img-file-input"
                                 type="file"
                                 multiple
-                                className=""
+                                className="listing-"
                                 aria-required="true"
                                 aria-invalid="false"
                                 onChange={(e) => {
@@ -186,9 +190,9 @@ const Listing = () => {
                                   setUploadedImages(e.target.files);
                                 }}
                               />
-                              <div className="d--fl jc--c ai--c">
-                                <i className="l-icon cloud m--r--2"></i>
-                                <div className="tc--white">UPLOAD</div>
+                              <div className="listing-d--fl jc--c ai--c">
+                                <i className="listing-l-icon cloud m--r--2"></i>
+                                <div className="listing-tc--white">UPLOAD</div>
                               </div>
                             </div>
                           </label>
@@ -199,7 +203,7 @@ const Listing = () => {
                             backgroundColor: "#0066FF",
                             color: "#fff",
                           }}
-                          className="upload-button"
+                          className="listing-upload-button"
                           onClick={onUploadAttachements}
                         >
                           UPLOAD
@@ -225,69 +229,69 @@ const Listing = () => {
                     </div>
                   </div>
 
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         <p id="red">* </p>Title
                       </div>
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add a Title to your product.
                       </p>
                     </div>
                     <div
                       data-et-name="listingEditorTitle"
-                      className="col-x24 col-l20"
+                      className="listing-col-x24 col-l20"
                     >
                       <div
                         aria-haspopup="true"
                         tabIndex={0}
                         data-test="dropdown"
-                        className="dropdown d--b"
+                        className="listing-dropdown d--b"
                       >
-                        <div data-test="dropdown-container" className="">
-                          <div className="dropdown__selector type-ahead__input">
-                            <div className="ps--r">
+                        <div data-test="dropdown-container" className="listing-">
+                          <div className="listing-dropdown__selector type-ahead__input">
+                            <div className="listing-ps--r">
                               <input
                                 placeholder="What are you selling?"
                                 maxLength={500}
                                 type="text"
                                 data-vv-name="title"
-                                className="form__text form__text--input p--4"
+                                className="listing-form__text form__text--input p--4"
                                 aria-required="true"
                                 aria-invalid="true"
                                 id="title"
                                 name="title"
                                 onChange={setTitle}
                               />
-                              <p className="tc--lg listing-editor__title__text__suffix"></p>
+                              <p className="listing-tc--lg listing-editor__title__text__suffix"></p>
                             </div>
                           </div>
                         </div>
                         <div> </div>
                       </div>
                       <p
-                        className="form__error-message"
+                        className="listing-form__error-message"
                         style={{ display: "none" }}
                       ></p>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         <p id="red">* </p>Description
                       </div>
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Briefly describe your listing.
                       </p>
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       {" "}
                       <textarea
                         placeholder="Describe it!"
                         maxLength={1500}
                         data-vv-name="description"
                         aria-label="form__text"
-                        className="form__text form__text--input listing-editor__description__input p--3"
+                        className="listing-form__text form__text--input listing-editor__description__input p--3"
                         aria-required="true"
                         aria-invalid="false"
                         style={{ height: "135px" }}
@@ -296,27 +300,27 @@ const Listing = () => {
                         onChange={setDescription}
                       ></textarea>
                       <p
-                        className="form__error-message"
+                        className="listing-form__error-message"
                         style={{ display: "none" }}
                       ></p>
                       <p
-                        className="ta--r p--t--2 tc--lg"
+                        className="listing-ta--r p--t--2 tc--lg"
                         style={{ display: "none" }}
                       >
                         1500
                       </p>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         <p id="red">* </p>Category
                       </div>
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add a Category to your product.
                       </p>
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       <FormControl variant="outlined">
                         <InputLabel id="categoryLabel">
                           Select category
@@ -335,7 +339,7 @@ const Listing = () => {
                           }}
                           placeholder="Select Category"
                         >
-                          <MenuItem className="" value="Womenswear">
+                          <MenuItem className="listing-" value="Womenswear">
                             Womenswear
                           </MenuItem>
                           <MenuItem value="Menswear">Menswear</MenuItem>
@@ -366,32 +370,32 @@ const Listing = () => {
                       </FormControl>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         <p id="red">* </p>Quantity
                       </div>
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add a Quantity for your product.
                       </p>
                     </div>
                     <div
                       data-et-name="listingEditorQuanititySection"
-                      className="col-x24 col-l20"
+                      className="listing-col-x24 col-l20"
                     >
                       <div
                         aria-haspopup="true"
                         tabIndex={0}
                         data-test="dropdown"
                       >
-                        <div data-test="dropdown-container" className="">
-                          <div className="dropdown__selector d--b">
+                        <div data-test="dropdown-container" className="listing-">
+                          <div className="listing-dropdown__selector d--b">
                             <input
                               placeholder="Enter the Quantity"
                               type="number"
                               maxLength={50}
                               aria-label="input"
-                              className="form__text form__text--input p--4"
+                              className="listing-form__text form__text--input p--4"
                               onInput={setQuantity}
                             />
                           </div>
@@ -399,14 +403,14 @@ const Listing = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">Size</div>
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">Size</div>
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Select size (if any).
                       </p>
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       <FormControl variant="outlined">
                         <InputLabel>Select Size</InputLabel>
                         <Select
@@ -447,40 +451,40 @@ const Listing = () => {
                       </FormControl>
 
                       <p
-                        className="form__error-message"
+                        className="listing-form__error-message"
                         style={{ display: "none" }}
                       >
                         false
                       </p>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         Brand
                       </div>
-                      {/*<p className="listing-editor__optional">Optional</p>*/}
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      {/*<p className="listing-listing-editor__optional">Optional</p>*/}
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add Brand details about your product.
                       </p>
                     </div>
                     <div
                       data-et-name="listingEditorBrandSection"
-                      className="col-x24 col-l20"
+                      className="listing-col-x24 col-l20"
                     >
                       <div
                         aria-haspopup="true"
                         tabIndex={0}
                         data-test="dropdown"
-                        className="dropdown"
+                        className="listing-dropdown"
                       >
-                        <div data-test="dropdown-container" className="">
-                          <div className="dropdown__selector type-ahead__input">
+                        <div data-test="dropdown-container" className="listing-">
+                          <div className="listing-dropdown__selector type-ahead__input">
                             <div
                               data-et-name="style_tag"
                               data-et-element-type="button"
                               data-et-on-name="create_listing"
-                              className="ps--r"
+                              className="listing-ps--r"
                             >
                               <input
                                 placeholder="Enter the Brand/Designer"
@@ -489,7 +493,7 @@ const Listing = () => {
                                 defaultValue={product.brand}
                                 maxLength={50}
                                 aria-label="input"
-                                className="form__text form__text--input p--4"
+                                className="listing-form__text form__text--input p--4"
                                 onChange={(e: any) => {
                                   setProduct({
                                     ...product,
@@ -503,17 +507,17 @@ const Listing = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         Color
                       </div>
-                      {/*<p className="listing-editor__optional">Optional</p>*/}
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      {/*<p className="listing-listing-editor__optional">Optional</p>*/}
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Add color to your product.
                       </p>
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       <FormControl variant="outlined">
                         <InputLabel>Select Color</InputLabel>
                         <Select
@@ -529,7 +533,7 @@ const Listing = () => {
                           }}
                         >
                           <MenuItem
-                            className="d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(234, 46, 46)",
                             }}
@@ -538,7 +542,7 @@ const Listing = () => {
                             Red
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(251, 22, 128)",
                             }}
@@ -547,7 +551,7 @@ const Listing = () => {
                             Pink
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(252, 166, 40)",
                             }}
@@ -556,7 +560,7 @@ const Listing = () => {
                             Orange
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(255, 238, 55)",
                             }}
@@ -565,7 +569,7 @@ const Listing = () => {
                             Yellow
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(60, 156, 68)",
                             }}
@@ -574,7 +578,7 @@ const Listing = () => {
                             Green
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(19, 127, 193)",
                             }}
@@ -583,7 +587,7 @@ const Listing = () => {
                             Blue
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(127, 15, 129)",
                             }}
@@ -592,7 +596,7 @@ const Listing = () => {
                             Purple
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(255, 215, 46)",
                             }}
@@ -601,7 +605,7 @@ const Listing = () => {
                             Gold
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(233, 235, 236)",
                             }}
@@ -610,14 +614,14 @@ const Listing = () => {
                             Silver
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{ backgroundColor: "rgb(0, 0, 0)" }}
                             value={"Black"}
                           >
                             Black
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(146, 146, 146)",
                             }}
@@ -626,7 +630,7 @@ const Listing = () => {
                             Gray
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(255, 255, 255)",
                             }}
@@ -635,7 +639,7 @@ const Listing = () => {
                             White
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c br--lighter-gray m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(244, 224, 202)",
                             }}
@@ -644,14 +648,14 @@ const Listing = () => {
                             Cream
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{ backgroundColor: "rgb(102, 53, 9)" }}
                             value={"Brown"}
                           >
                             Brown
                           </MenuItem>
                           <MenuItem
-                            className="d--fl ja--c m--b--2 color__circle--large"
+                            className="listing-d--fl ja--c m--b--2 color__circle--large"
                             style={{
                               backgroundColor: "rgb(209, 180, 142)",
                             }}
@@ -663,30 +667,30 @@ const Listing = () => {
                       </FormControl>
                     </div>
                   </div>
-                  <div className="listing-editor__subsection">
-                    <div className="col-x24 col-l4 listing-edit__section__info">
-                      <div className="listing-editor__section__title">
+                  <div className="listing-listing-editor__subsection">
+                    <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                      <div className="listing-listing-editor__section__title">
                         Material
                       </div>
-                      {/*<p className="listing-editor__optional">Optional</p> */}
-                      <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                      {/*<p className="listing-listing-editor__optional">Optional</p> */}
+                      <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                         Describe the fabric or material of your product.
                       </p>
                     </div>
-                    <div className="col-x24 col-l20">
+                    <div className="listing-col-x24 col-l20">
                       <div
                         aria-haspopup="true"
                         tabIndex={0}
                         data-test="dropdown"
-                        className="dropdown"
+                        className="listing-dropdown"
                       >
-                        <div data-test="dropdown-container" className="">
-                          <div className="dropdown__selector type-ahead__input">
+                        <div data-test="dropdown-container" className="listing-">
+                          <div className="listing-dropdown__selector type-ahead__input">
                             <div
                               data-et-name="style_tag"
                               data-et-element-type="button"
                               data-et-on-name="create_listing"
-                              className="ps--r"
+                              className="listing-ps--r"
                             >
                               <input
                                 placeholder="Enter the material"
@@ -694,7 +698,7 @@ const Listing = () => {
                                 data-vv-name="style-tag-input"
                                 type="text"
                                 aria-label="input"
-                                className="form__text form__text--input p--4"
+                                className="listing-form__text form__text--input p--4"
                                 onChange={(e) => {
                                   setProduct({
                                     ...product,
@@ -709,26 +713,26 @@ const Listing = () => {
                     </div>
                   </div>
                 </section>
-                <h1 className="p--b--5 fw--light">Price</h1>
-                <section className="listing-editor__section">
-                  <div className="listing-editor__subsection">
+                <h1 className="listing-p--b--5 fw--light">Price</h1>
+                <section className="listing-listing-editor__section">
+                  <div className="listing-listing-editor__subsection">
                     <div
                       data-et-name="listingEditorPricingSection"
-                      className=""
+                      className="listing-"
                     >
-                      <div className="col-x24 col-l4 listing-edit__section__info">
-                        <div className="h3 tr--uppercase tc--b fw--med m--b--2 listing-editor__section__title">
+                      <div className="listing-col-x24 col-l4 listing-edit__section__info">
+                        <div className="listing-h3 tr--uppercase tc--b fw--med m--b--2 listing-editor__section__title">
                           <p id="red">* </p>Price
                         </div>
-                        <p className="tc--lg fw--light m--t--2 m--b--2 lh--medium">
+                        <p className="listing-tc--lg fw--light m--t--2 m--b--2 lh--medium">
                           Add price at which you want to sell your product.
                         </p>
                       </div>
-                      <div className="col-x24 col-l20">
-                        <div className="listing-editor__field-description__text m--t--3">
+                      <div className="listing-col-x24 col-l20">
+                        <div className="listing-listing-editor__field-description__text m--t--3">
                           Original Price
                         </div>
-                        <div className="d--fl ai--c">
+                        <div className="listing-d--fl ai--c">
                           <input
                             placeholder="Original sale price of the item"
                             maxLength={15}
@@ -736,7 +740,7 @@ const Listing = () => {
                             pattern="[0-9]*"
                             data-vv-name="originalPrice"
                             aria-label="form__text"
-                            className="ff--no-increment-input p--4 listing-editor__input--half form__text form__text--input"
+                            className="listing-ff--no-increment-input p--4 listing-editor__input--half form__text form__text--input"
                             aria-required="true"
                             aria-invalid="false"
                             onChange={(e) => {
@@ -748,15 +752,15 @@ const Listing = () => {
                           />
                         </div>
                         <p
-                          className="form__error-message"
+                          className="listing-form__error-message"
                           style={{ display: "none" }}
                         >
                           Required
                         </p>
-                        <div className="listing-editor__field-description__text m--t--3">
+                        <div className="listing-listing-editor__field-description__text m--t--3">
                           Sale Price
                         </div>
-                        <div className="d--fl ai--c">
+                        <div className="listing-d--fl ai--c">
                           <input
                             placeholder="The amount you wish to sell the product for"
                             maxLength={15}
@@ -764,7 +768,7 @@ const Listing = () => {
                             pattern="[0-9]*"
                             data-vv-name="listingPrice"
                             aria-label="form__text"
-                            className="ff--no-increment-input p--4 listing-editor__input--half form__text form__text--input"
+                            className="listing-ff--no-increment-input p--4 listing-editor__input--half form__text form__text--input"
                             aria-required="true"
                             aria-invalid="false"
                             onChange={(e) => {
@@ -776,40 +780,40 @@ const Listing = () => {
                           />{" "}
                         </div>
                         <p
-                          className="form__error-message"
+                          className="listing-form__error-message"
                           style={{ display: "none" }}
                         >
                           Invalid Price
                         </p>
-                        <div className="m--t--2 m--b--4"></div>
-                        {/* <div className="listing-editor__field-description__text m--t--3">
+                        <div className="listing-m--t--2 m--b--4"></div>
+                        {/* <div className="listing-listing-editor__field-description__text m--t--3">
                           Shipping Options
                         </div>
-                        <div className="d--fl">
-                          <div className="col-x24 col-l20">
+                        <div className="listing-d--fl">
+                          <div className="listing-col-x24 col-l20">
                             <FormControl variant="outlined">
                               <InputLabel>Select Shipping</InputLabel>
-                              <Select className="listing-editor__tile--color d--if fd--c p--2 va--t d--if ja--c fd--c">
+                              <Select className="listing-listing-editor__tile--color d--if fd--c p--2 va--t d--if ja--c fd--c">
                                 <MenuItem value="5.99 USD">5.99 USD</MenuItem>
                                 <MenuItem value="Free">Free</MenuItem>
                               </Select>
                             </FormControl>
                           </div>
                         </div>
-                        <div className="h4 m--t--3 m--b--3">
+                        <div className="listing-h4 m--t--3 m--b--3">
                           Earnings made by you
                         </div>
-                        <div className="d--fl ai--c">
+                        <div className="listing-d--fl ai--c">
                           <div
                             data-test="text"
-                            className="form__group listing-editor__input--half"
+                            className="listing-form__group listing-editor__input--half"
                           >
                             {" "}
                             <input
                               type="text"
                               data-test="text-input"
                               disabled={true}
-                              className="form__text form__text--input listing-editor__input--half listing-editor__calculated-earnings p--4"
+                              className="listing-form__text form__text--input listing-editor__input--half listing-editor__calculated-earnings p--4"
                             />{" "}
                           </div>
                         </div> */}
@@ -818,13 +822,13 @@ const Listing = () => {
                   </div>
                 </section>
 
-                <div className="">
-                  <div className="form__actions" id="list_button">
+                <div className="listing-">
+                  <div className="listing-form__actions" id="list_button">
                     <button
                       type="submit"
                       data-et-name="next"
                       data-et-prop-content=""
-                      className="btn--list bg--btn-blue btn--large btn--wide"
+                      className="listing-btn--list bg--btn-blue btn--large btn--wide"
                     >
                       List Item
                     </button>

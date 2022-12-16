@@ -224,7 +224,7 @@
       top: calc(50% - 20px) !important;
     }
     .MuiSvgIcon-root{
-      font-size: 2.5rem !important;
+      /* font-size: 2.5rem !important; */
     }
   }
   

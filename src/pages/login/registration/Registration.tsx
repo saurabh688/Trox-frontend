@@ -106,9 +106,10 @@ const Registration = () => {
               placeholder="Enter Password"
               variant="standard"
             />
-            <div style={{ textAlign: "left" }}>
+            <div style={{ textAlign: "left",paddingLeft:"28px" }}>
               Show Password:
               <Checkbox
+              size="small"
                 checked={isChecked}
                 onClick={() => {
                   setIsChecked(!isChecked);

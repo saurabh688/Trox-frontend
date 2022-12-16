@@ -24,6 +24,7 @@ const RegistrarionOtp = () => {
       <div className="registraion-layout">
         <h3> Verify your account</h3>
         <p>To verify, we've sent a One Time Password (OTP)</p>
+        <br/>
         <Grid xs={12} md={12}>
           <TextField
             id="registration-OTP"

@@ -17,7 +17,8 @@ const Login = () => {
   const signIn = (e: any) => {
     e.preventDefault();
     console.log("userName", userName, passwordValue);
-    dispatch(loginStart({ emailID: userName, password: passwordValue }));
+    // dispatch(loginStart({ emailID_or_phone: userName, password: passwordValue }));
+    navigate("/")
   };
 
   return (
