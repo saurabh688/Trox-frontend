@@ -36,20 +36,29 @@ function* productWorker(action: any): any {
       case searchDataStart.type:
         {
           const response: any = yield call(getProducts, action.payload);
-          yield put(searchDataSuccess({ products: response.data }));
+          console.log('213423423143',response)
+          if (response.success) {
+            console.log('success',response)
+            yield put(searchDataSuccess(response.data ));
+          } else {
+            console.log('failure',response)
+
+            // yield put(searchDataFailure());
+          }
         }
         break;
 
-      case getProductsStartBasedOnFilters.type:
-        {
-          const response: any = yield call(
-            getFilterBasedProducts,
-            action.payload
-          );
-          yield put(searchDataSuccess({ products: response.ResponseBody }));
-        }
-        break;
-      case getProduct.type:
+      // case getProductsStartBasedOnFilters.type:
+      //   {
+      //     const response: any = yield call(
+      //       getFilterBasedProducts,
+      //       action.payload
+      //     );
+      //     yield put(searchDataSuccess({ products: response.ResponseBody }));
+      //   }
+      //   break;
+      
+        case getProduct.type:
         {
           console.log(action)
           const response: any = yield call(getProductByID, action.payload.id);
@@ -58,9 +67,8 @@ function* productWorker(action: any): any {
         break;
       case createProductStart.type:
         {
-          const { product, history } = action.payload;
-          console.log('productproduct',product)
-          const response: any = yield call(createProduct, product);
+          console.log('productproduct', action.payload)
+          const response: any = yield call(createProduct, action.payload);
           yield put(createProductSuccess({ product: response.ResponseBody }));
           // if (response.ResponseBody.verified) {
           //}
@@ -70,13 +78,7 @@ function* productWorker(action: any): any {
         break;
     }
   } catch (err: any) {
-    console.error(`Error occuring while calling an action ${action.type}`, err);
-
-    if (action.type === searchDataStart.type) {
-      yield put(searchDataFailure);
-    } else if (action.type === createProductStart.type) {
-      // yield put(createProductFailure({ msg: err?.response.data.message }));
-    }
+   console.log(err)
   }
 }
 

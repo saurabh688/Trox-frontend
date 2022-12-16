@@ -80,30 +80,30 @@ const Listing = () => {
     });
   };
   const submitForm = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     let data: BuyableProduct = {
       ...product,
       listingStatus: "Live",
-      userId: userData.user["_id"],
+      userId: userData.user["id"],
     };
 
     setProduct(data);
     console.log("data", {
       ...product,
       listingStatus: "Live",
-      userId: userData.user["_id"],
+      userId: userData.user["id"],
     });
-    e.preventDefault();
     dispatch(
       createProductStart({
-        product: {
+        
           ...product,
           listingStatus: "Live",
-          userId: userData.user["_id"],
-        },
+          userId: userData.user["id"],
+      
       })
     );
     setTimeout(() => {
-      // navigate("/");
+      navigate("/");
     }, 1000);
   };
 
@@ -140,14 +140,8 @@ const Listing = () => {
   //   }, [uploadedImagesUrls]);
 
   useEffect(() => {
-    // if (productState.isLoading === false && productState.error === false) {
-    //   setTimeout(() => {
-    //     history.push({
-    //       pathname: "/",
-    //     });
-    //   }, 1000);
-    // }
-  }, [productState]);
+  console.log('userDatauserData',userData)
+  }, [userData]);
 
   return (
     <>

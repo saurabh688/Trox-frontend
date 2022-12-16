@@ -1,26 +1,33 @@
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "./style.css";
 import doorSVG from "./images/door.svg";
 import cartSVG from "./images/cart.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginStart } from "../../redux/reduxSlice/user";
+import { RootState } from "../../redux/store";
 
 const Login = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const userData = useSelector((state: RootState) => state.user);
 
   const signIn = (e: any) => {
     e.preventDefault();
     console.log("userName", userName, passwordValue);
-    // dispatch(loginStart({ emailID_or_phone: userName, password: passwordValue }));
-    navigate("/")
+    dispatch(
+      loginStart({ emailID_or_phone: userName, password: passwordValue })
+    );
   };
-
+  useEffect(() => {
+    if (userData.loggedIn) {
+      navigate("/");
+    }
+  }, [userData]);
   return (
     <>
       <img className="wave" src={require("./images/wave.png")} />

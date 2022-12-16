@@ -1,8 +1,16 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Header from "../layout/header/Header";
+import { getUserStart } from "../redux/reduxSlice/user";
 import routes from "./routeList";
 
 const CustomRoutes: React.FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserStart());
+  }, []);
   return (
     <>
       <Routes>

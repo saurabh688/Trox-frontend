@@ -49,7 +49,7 @@ const RegistrarionOtp = () => {
               console.log("useruser", userData);
               dispatch(
                 verifyEmailOTPStart({
-                  userId: userData.user.id,
+                  userId: userData.validate.id,
                   otp: otp,
                 })
               );
@@ -67,8 +67,8 @@ const RegistrarionOtp = () => {
             onClick={() => {
               dispatch(
                 verifyEmailOTPStart({
-                  userId: userData.user.id,
-                  emailId: userData.user.emailId,
+                  userId: userData.validate.id,
+                  emailId: userData.validate.emailId,
                 })
               );
             }}

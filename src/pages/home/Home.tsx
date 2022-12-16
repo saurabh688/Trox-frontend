@@ -9,7 +9,10 @@ import Product from "../../components/product/Product";
 import { BuyableProduct } from "../../types";
 import Carousel from "react-material-ui-carousel";
 import { Banner } from "../../components/banner/Banner";
-import image1 from "../../assets/banner_image/banner_image_1.jpg" 
+import image1 from "../../assets/banner_image/banner_image_4.jpg" 
+import image2 from "../../assets/banner_image/banner_image_2.jpg" 
+import image3 from "../../assets/banner_image/banner_image_3.jpg" 
+import { getUserStart } from "../../redux/reduxSlice/user";
 
 const Home = () => {
   const { state } = useLocation();
@@ -31,11 +34,16 @@ const Home = () => {
 
   var items = [
     {
+      image : image2,
+      description: "Hello World!",
+    },
+    {
       image: image1,
       description: "Probably the most random thing you have ever seen!",
     },
+    
     {
-      image : image1,
+      image : image3,
       description: "Hello World!",
     },
   ];

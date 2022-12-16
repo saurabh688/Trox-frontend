@@ -139,6 +139,27 @@ const verifyEmailOTP = async (data:any) => {
     return e.response;
   }
 }
+const getUserDetails = async (accessToken:any) => {
+  var config = {
+    method: 'get',
+    url: baseURL+'/user/detail',
+    headers: { 
+      'authorization': accessToken
+    }
+  };
+  try {
+    console.log('accacacacaca',accessToken)
+    const res = await axios(config);
+    console.log('getUserDetails111',res.data)
+
+    return res.data;
+  } catch (e:any){
+    console.log('getUserDetails222',e.response)
+    return e.response;
+  }
+}
+
+
 
 export {
   signUp,
@@ -150,6 +171,7 @@ export {
   getCountryCode,
   passwordUpdate,
   registerAffiliate,
+  getUserDetails,
   affiliateLogin,
   subscribeNewLetter,
   verifyEmailOTP

@@ -1,14 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAccessToken, setAccessToken, setRefreshToken } from "../../utils/auth";
+import {
+  getAccessToken,
+  setAccessToken,
+  setRefreshToken,
+} from "../../utils/auth";
 
 interface State {
   isLoading: boolean;
   loggedIn: boolean;
   user: any | null;
+  validate: any | null;
   error?: boolean;
   message?: string;
-  accessToken?: string | null;
-  loggedOut?: boolean;
   // verified?: boolean;
   // appVerifier?: any;
   // emailVerificationSigninErr?: boolean;
@@ -18,10 +21,9 @@ const initialState: State = {
   isLoading: false,
   loggedIn: false,
   user: null,
-  accessToken: getAccessToken() || null,
+  validate: null,
   error: false,
   message: "",
-  loggedOut: true,
   // verified: false,
   // emailVerificationSigninErr: false,
 };
@@ -36,28 +38,25 @@ export const userSlice = createSlice({
       isLoading: true,
     }),
     loginSuccess: (state: State, action) => {
-      // if (action.payload.verified) {
-      //   state.verified = true;
-      //   state.user = action.payload.user
-      //   state.isLoading = false;
-      // } else {
-      //   state = {
-      //     ...state,
-      //     isLoading: false,
-      //     loggedIn: true,
-      //     error: false,
-      //     user: action.payload.user,
-      //     accessToken: action.payload.user.token
-      //   }
-      // }
+      const data = action.payload.data;
+      console.log('action.payload2232',action.payload)
+      return{
+      ...state,
+      isLoading: false,
+      loggedIn: true,
+      message:action.payload.message,
+      error: false,
+      user: data,
+    }
+    
     },
     loginFail: (state: State, action) => ({
       ...state,
-      // isLoading: false,
-      // loggedIn: false,
-      // emailVerificationSigninErr: action.payload.emailVerificationSigninErr,
-      // error: action.payload.error,
-      // message: action.payload.msg
+      isLoading: false,
+      loggedIn: false,
+      user:null,
+      error: action.payload.error,
+      message: action.payload.msg
     }),
     logoutStart: (state: State) => ({
       ...initialState,
@@ -72,19 +71,30 @@ export const userSlice = createSlice({
       ...state,
       isLoading: false,
     }),
-    getUserSuccess: (state: State, action) => ({
+    getUserSuccess: (state: State, action) => {
+     const data = action.payload.data;
+      console.log('action.payload',action.payload)
+      return{
       ...state,
-      // isLoading: false,
-      // loggedIn: true,
-      // error: false,
-      // user: action.payload.user,
-      // accessToken: action.payload.user.token
-    }),
+      isLoading: false,
+      loggedIn: true,
+      message:action.payload.message,
+      error: false,
+      user: data,
+    }},
+    getUserFailure: (state: State,action) => {
+       return{
+       ...state,
+       isLoading: false,
+       loggedIn: false,
+       message:action.payload.message,
+       error: true,
+       user: null,
+     }},
     clearUserData: (state: State) => ({
       ...state,
       // user: {},
       // loggedIn: false,
-      // loggedOut: true,
       // isLoading: false,
       // error: false,
       // accessToken: null
@@ -94,65 +104,68 @@ export const userSlice = createSlice({
       isLoading: true,
     }),
     signupStartSuccess: (state: State, action) => {
-      console.log('success',action.payload)
+      console.log("success", action.payload);
       let msg = action.payload.res.message;
       let value = action.payload.res.data;
 
-      return{
-      ...initialState,
-      isLoading: false,
-      user: value,
-      message: msg,
-      error: false,
-    }},
+      return {
+        ...initialState,
+        isLoading: false,
+        validate: value,
+        loggedIn:false,
+        message: msg,
+        error: false,
+      };
+    },
     signupStartFailure: (state: State, action) => {
-      console.log('failure',action.payload.res.data.message)
+      console.log("failure", action.payload.res.data.message);
       let msg = action.payload.res.data.message;
-      return{
-      ...initialState,
-      isLoading: false,
-      user: null,
-      error: true,
-      message: msg,
-    }},
+      return {
+        ...initialState,
+        isLoading: false,
+        validate: null,
+        error: true,
+        message: msg,
+      };
+    },
 
     setLoading: (state: State, action) => ({
       ...state,
       isLoading: action.payload.loading,
     }),
-  
+
     verifyEmailOTPStart: (state: State, action) => ({
       ...state,
-      isLoading: true
+      isLoading: true,
     }),
-    verifyEmailOTPSuccess: (state: State,action) => {
-      console.log(action.payload.data)
-      setAccessToken(action.payload.data.accessToken)
-      setRefreshToken(action.payload.data.refreshTokenObject)
-      return{
-      ...state,
-      loggedIn:true,
-      isLoading: false
-    }},
+    verifyEmailOTPSuccess: (state: State, action) => {
+      console.log('verifyEmailOTPSuccessverifyEmailOTPSuccess',action.payload.data);
+      return {
+        ...state,
+        user: action.payload.data,
+        loggedIn: true,
+        isLoading: false,
+      };
+    },
     verifyEmailOTPFailure: (state: State, action) => ({
       ...state,
       isLoading: false,
-      error: true
+      error: true,
     }),
     resendEmailOTPStart: (state: State) => ({
       ...state,
-      isLoading: true
+      isLoading: true,
     }),
     resendEmailOTPSuccess: (state: State) => {
-      
       return {
-      ...state,
-      isLoading: false
-    }},
+        ...state,
+        isLoading: false,
+      };
+    },
     resendEmailOTPFailure: (state: State, action) => ({
       ...state,
       isLoading: false,
-      error: true
+      error: true,
     }),
   },
 });
@@ -165,6 +178,7 @@ export const {
   logoutSuccess,
   getUserStart,
   getUserSuccess,
+  getUserFailure,
   clearUserData,
   signupStartStart,
   signupStartSuccess,

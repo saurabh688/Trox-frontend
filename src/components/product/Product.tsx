@@ -7,12 +7,11 @@ const Product = (props: any) => {
         <p>Brand:{props.data.brand}</p>
         <p>Description:{props.data.description}</p>
         <p className="product__price">
-          <small>$</small>
-          <strong>{props.data.price}</strong>
+          <strong>{`$`+props.data.price}</strong>
         </p>
       </div>
       <img src={props.data.image} alt="" />
-      <button>Add to Basket</button>
+      <button>View Details</button>
     </div>
   );
 };

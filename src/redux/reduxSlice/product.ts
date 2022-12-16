@@ -24,14 +24,16 @@ export const productSlice = createSlice({
       isLoading: true,
     }),
     searchDataSuccess: (state: State, action) => {
+      console.log('searchDataSuccesssearchDataSuccesssearchDataSuccess',action.payload)
       return({
       ...state,
       isLoading: false,
-      products: action.payload.products,
+      products: action.payload,
     })},
     searchDataFailure: (state: State) => ({
       ...state,
       error: true,
+      products:[],
       isLoading: false,
     }),
     getProductsStartBasedOnFilters: (state: State, action) => ({

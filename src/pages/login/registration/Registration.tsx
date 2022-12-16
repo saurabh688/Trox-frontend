@@ -33,11 +33,11 @@ const Registration = () => {
   useEffect(() => {
     console.log("user", userData);
     if (isnavigate) {
-      console.log(userData.user);
-      if (userData.user == null) {
+      console.log(userData.validate);
+      if (userData.validate == null) {
         if (!!userData.message) alert(userData.message);
       } else {
-        if (userData.user) { 
+        if (userData.validate) { 
           navigate("/verification");
           
         }

@@ -1,14 +1,17 @@
-import axios from "../../api/axiosController";
+import axios from 'axios';
 import { AxiosError } from "axios";
 import { BuyableProduct } from "../../types";
+let baseURL = process.env.REACT_APP_BACKEND_HOST
 
 export const getProducts = async (searchValue: string) => {
-  let uri = `product/searchProduct/?value=${searchValue}`;
+  let uri = baseURL+`product/searchProduct/?value=${searchValue}`;
   try {
     const res = await axios.get(uri);
+    console.log('getProduct',res)
     return res.data;
-  } catch (e) {
-    throw e;
+  } catch (e:any) {
+    console.log('getProducteeeee',e.response.data)
+    return e.response.data
   }
 };
 
@@ -54,19 +57,17 @@ export const getFilterBasedProducts = async (data: any) => {
 };
 
 export const createProduct = async (buyableProduct: BuyableProduct) => {
-  let data1 = [];
-  data1.push(buyableProduct)
-  console.log('fdsafsdaf',data1)
-  let uri = `/product/addProduct`;
+  console.log('buyableProduct',buyableProduct)
+  let data = [];
+  data.push(buyableProduct)
+  console.log('fdsafsdaf',data)
+  let uri = baseURL+`/product/addProduct`;
   try {
-    const res = await axios.post(uri, data1);
+    const res = await axios.post(uri, data);
+    console.log('createProductres',res.data)
     return res.data;
-  } catch (e) {
-    const err = e as AxiosError;
-    if (err.response) {
-      console.log(err.response.data);
-      console.log(err.response.status);
-    }
-    throw e;
+
+  } catch (e:any) {
+    return e.response;
   }
 };
