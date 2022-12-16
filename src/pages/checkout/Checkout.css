@@ -1,0 +1,11 @@
+.checkout-continer {
+    padding: 16px;
+
+}
+
+.checkout-content {
+    width: "100%";
+    margin: 6rem auto;
+    border: 1px solid #999;
+    padding: 16px;
+}

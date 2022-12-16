@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.order-container {
+padding: 16px;
+}
+
 .login__logo {
     width: 100px;
     object-fit: contain;
@@ -172,7 +176,7 @@
 
 a {
     display: block;
-    text-align: right;
+    text-align: left;
     text-decoration: none;
     color: #999;
     font-size: 0.9rem;

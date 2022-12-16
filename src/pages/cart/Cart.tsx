@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Cart.css";
 const Cart = () => {
+  let navigate = useNavigate();
   const [cartData, setCartData] = useState<any>([]);
   useEffect(() => {
     let savedCart = window.localStorage.getItem("cart");
@@ -22,6 +23,9 @@ const Cart = () => {
         <Button
           type="submit"
           variant="contained"
+          onClick={() => {
+            navigate("/checkout-process");
+          }}
           style={{ display: "inline-block", textAlign: "right" }}
         >
           Continue
