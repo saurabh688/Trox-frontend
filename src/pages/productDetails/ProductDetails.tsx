@@ -46,7 +46,7 @@ const ProductDetails = () => {
           <img
             data-image="red"
             className="active"
-            src="https://m.media-amazon.com/images/I/61O9tWR6WDS._SX522_.jpg"
+            src="https://solesavy.com/wp-content/uploads/2022/08/Air-Jordan-1-Lost-and-Found-DZ5485-612-Release-Date-731x770.jpeg" 
             // src={productDetailsValue?.productGroupImageUrl&&productDetailsValue?.productGroupImageUrl.length>0 ?productDetailsValue?.productGroupImageUrl[0]:""}
             alt=""
           />

@@ -28,7 +28,7 @@ const Review = (props:any) => {
                             <CardMedia
                                 component="img"
                                 height="194"
-                                image={product.img}
+                                image={"https://solesavy.com/wp-content/uploads/2022/08/Air-Jordan-1-Lost-and-Found-DZ5485-612-Release-Date-731x770.jpeg"}
                                 alt="Product img"
                             />
                             <CardContent>

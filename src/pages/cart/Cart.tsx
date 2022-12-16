@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Cart.css";
 const Cart = () => {
   let navigate = useNavigate();
-  const [cartData, setCartData] = useState<any>([]);
+  const [cartData, setCartData] = useState<any>([]); 
   useEffect(() => {
     let savedCart = window.localStorage.getItem("cart");
     if (savedCart && savedCart != null && savedCart !== "undefined") {
@@ -37,7 +37,7 @@ const Cart = () => {
           <div className="cart-image">
             <img
               width="200px"
-              src="https://m.media-amazon.com/images/I/61O9tWR6WDS._SX522_.jpg"
+              src="https://solesavy.com/wp-content/uploads/2022/08/Air-Jordan-1-Lost-and-Found-DZ5485-612-Release-Date-731x770.jpeg" 
               alt="productimage"
             />
           </div>
