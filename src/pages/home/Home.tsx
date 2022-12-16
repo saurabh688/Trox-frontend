@@ -2,12 +2,15 @@ import "./Home.css";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, searchDataStart } from "../../redux/reduxSlice/product";
 import { RootState } from "../../redux/store";
 import Product from "../../components/product/Product";
 import { BuyableProduct } from "../../types";
+import Carousel from "react-material-ui-carousel";
+import { Banner } from "../../components/banner/Banner";
+import image1 from "../../assets/banner_image/banner_image_1.jpg" 
+
 const Home = () => {
   const { state } = useLocation();
 
@@ -25,6 +28,17 @@ const Home = () => {
     // dispatch(getProduct(product.id));
     navigate("/product-details", { state: { product } });
   };
+
+  var items = [
+    {
+      image: image1,
+      description: "Probably the most random thing you have ever seen!",
+    },
+    {
+      image : image1,
+      description: "Hello World!",
+    },
+  ];
 
   useEffect(() => {
     setDetailedProducts(products);
@@ -46,6 +60,12 @@ const Home = () => {
   return (
     <>
       <div className="home">
+        <Carousel indicators={true} navButtonsAlwaysVisible={true}>
+          {items.map((item, i) => (
+            <Banner key={i} image={item.image} />
+          ))}
+        </Carousel>
+
         {detailedProducts.length
           ? detailedProducts.map((item: any) => (
               <span

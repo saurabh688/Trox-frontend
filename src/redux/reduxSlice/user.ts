@@ -1,69 +1,70 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getAccessToken } from '../../utils/auth';
+import { createSlice } from "@reduxjs/toolkit";
+import { getAccessToken } from "../../utils/auth";
 
 interface State {
   isLoading: boolean;
   loggedIn: boolean;
-  accessToken?: string | null;
+  register: any | null;
   error?: boolean;
   message?: string;
+  accessToken?: string | null;
   user?: any;
   loggedOut?: boolean;
-  verified?: boolean;
-  showOtpScreen?: boolean;
-  appVerifier?: any;
-  emailVerificationSigninErr?: boolean;
+  // verified?: boolean;
+  // appVerifier?: any;
+  // emailVerificationSigninErr?: boolean;
 }
 
 const initialState: State = {
   isLoading: false,
   loggedIn: false,
+  register: null,
   accessToken: getAccessToken() || null,
   error: false,
-  message: '',
+  message: "",
   user: {},
   loggedOut: true,
-  verified: false,
-  emailVerificationSigninErr: false,
+  // verified: false,
+  // emailVerificationSigninErr: false,
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     loginStart: (state: State, action) => ({
       ...initialState,
       error: false,
-      isLoading: true
+      isLoading: true,
     }),
     loginSuccess: (state: State, action) => {
-      if (action.payload.verified) {
-        state.verified = true;
-        state.user = action.payload.user
-        state.isLoading = false;
-      } else {
-        state = {
-          ...state,
-          isLoading: false,
-          loggedIn: true,
-          error: false,
-          user: action.payload.user,
-          accessToken: action.payload.user.token
-        }
-      }
+      // if (action.payload.verified) {
+      //   state.verified = true;
+      //   state.user = action.payload.user
+      //   state.isLoading = false;
+      // } else {
+      //   state = {
+      //     ...state,
+      //     isLoading: false,
+      //     loggedIn: true,
+      //     error: false,
+      //     user: action.payload.user,
+      //     accessToken: action.payload.user.token
+      //   }
+      // }
     },
     loginFail: (state: State, action) => ({
       ...state,
-      isLoading: false,
-      loggedIn: false,
-      emailVerificationSigninErr: action.payload.emailVerificationSigninErr,
-      error: action.payload.error,
-      message: action.payload.msg
+      // isLoading: false,
+      // loggedIn: false,
+      // emailVerificationSigninErr: action.payload.emailVerificationSigninErr,
+      // error: action.payload.error,
+      // message: action.payload.msg
     }),
     logoutStart: (state: State) => ({
       ...initialState,
       error: false,
-      isLoading: true
+      isLoading: true,
     }),
     logoutSuccess: (state: State) => ({
       ...state,
@@ -71,94 +72,71 @@ export const userSlice = createSlice({
     }),
     getUserStart: (state: State) => ({
       ...state,
-      isLoading: false
+      isLoading: false,
     }),
     getUserSuccess: (state: State, action) => ({
       ...state,
-      isLoading: false,
-      loggedIn: true,
-      error: false,
-      user: action.payload.user,
-      accessToken: action.payload.user.token
+      // isLoading: false,
+      // loggedIn: true,
+      // error: false,
+      // user: action.payload.user,
+      // accessToken: action.payload.user.token
     }),
     clearUserData: (state: State) => ({
       ...state,
-      user: {},
-      loggedIn: false,
-      loggedOut: true,
-      isLoading: false,
-      error: false,
-      accessToken: null
+      // user: {},
+      // loggedIn: false,
+      // loggedOut: true,
+      // isLoading: false,
+      // error: false,
+      // accessToken: null
     }),
     signupStartStart: (state: State, action) => ({
       ...initialState,
-      isLoading: true
-    }),
-    signupStartSuccess: (state: State, action) => ({
-      ...initialState,
-      isLoading: false,
-      user: action.payload.user,
-      accessToken: action.payload.user.token,
-      error: false
-    }),
-    signupStartFailure: (state: State, action) => ({
-      ...initialState,
-      isLoading: false,
-      error: true,
-      msg: action.payload.msg
-    }),
-    showVerifyOTPStart: (state: State) => ({
-      ...state,
       isLoading: true,
-      showOtpScreen: true
     }),
-    showVerifyOTPSuccess: (state: State, action) => ({
-      ...state,
+    signupStartSuccess: (state: State, action) => {
+      console.log('success',action.payload)
+      let msg = action.payload.res.message;
+      let value = action.payload.res.data;
+
+      return{
+      ...initialState,
       isLoading: false,
-      showOtpScreen: true,
-      appVerifier: action.payload.appVerifier
-    }),
+      register: value,
+      message: msg,
+      error: false,
+    }},
+    signupStartFailure: (state: State, action) => {
+      console.log('failure',action.payload.res.data.message)
+      let msg = action.payload.res.data.message;
+      return{
+      ...initialState,
+      isLoading: false,
+      register: null,
+      error: true,
+      message: msg,
+    }},
+
     setLoading: (state: State, action) => ({
       ...state,
-      isLoading: action.payload.loading
+      isLoading: action.payload.loading,
     }),
-    setShowOtpScreen: (state: State, action) => ({
-      ...state,
-      showOtpScreen: action.payload.showOtpScreen
-    }),
-    sendOTPUsingFirebaseStart: (state: State, action) => ({
+  
+    verifyEmailOTPStart: (state: State, action) => ({
       ...state,
       isLoading: true
     }),
-    sendOTPUsingFirebaseSuccess: (state: State, action) => ({
+    verifyEmailOTPSuccess: (state: State) => ({
+      ...state,
+      isLoading: false
+    }),
+    verifyEmailOTPFailure: (state: State, action) => ({
       ...state,
       isLoading: false,
-      appVerifier: action.payload.appVerifier,
+      error: true
     }),
-    sendOTPUsingFirebaseFail: (state:State, action) => ({
-      ...state,
-      isLoading: false,
-      error: action.payload.error,
-      msg: action.payload.message
-    }),
-    setEmailVerified: (state:State, action) => ({
-      ...state,
-      verified: action.payload.verified 
-    }),
-    verifyEmailOTPStart: (state:State, action) => ({
-      ...state,
-      isLoading: true      
-    }),
-    verifyEmailOTPSuccess: (state:State) => ({
-      ...state,
-      isLoading: false      
-    }),
-    verifyEmailOTPFailure: (state:State, action) => ({
-      ...state,
-      isLoading: false,
-      error: true    
-    })
-  }
+  },
 });
 
 export const {
@@ -171,16 +149,9 @@ export const {
   getUserSuccess,
   clearUserData,
   signupStartStart,
-  showVerifyOTPStart,
-  showVerifyOTPSuccess,
   signupStartSuccess,
   signupStartFailure,
   setLoading,
-  setShowOtpScreen,
-  sendOTPUsingFirebaseFail,
-  sendOTPUsingFirebaseStart,
-  sendOTPUsingFirebaseSuccess,
-  setEmailVerified,
   verifyEmailOTPStart,
   verifyEmailOTPFailure,
   verifyEmailOTPSuccess,

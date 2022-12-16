@@ -1,13 +1,16 @@
-import axios                 from '../../api/axiosController';
+// import axios                 from '../../api/axiosController';
+import axios from 'axios';
 import { IUser, SignInUser } from '../../types';
-
-const signUpBuyer = async (signupData : IUser) => {
-  let uri = 'user/signup';
+let baseURL = process.env.REACT_APP_BACKEND_HOST
+const signUp = async (signupData : IUser) => {
+  let uri = baseURL+'/signup';
   try {
     const res = await axios.post(uri, signupData);
+    console.log('11111',res.data)
     return res.data;
-  } catch (e){
-    throw e;
+  } catch (e:any){
+    console.log('resdsfsd',e.response)
+    return e.response;
   }
 };
 
@@ -24,7 +27,7 @@ const registerAffiliate = async (signupData : IUser) => {
 }
 
 const signUpSeller = async (signupData : IUser) => {
-  let uri = 'user/seller/signup';
+  let uri = '/signup';
   try {
     const res = await axios.post(uri, signupData);
     return res.data;
@@ -34,7 +37,8 @@ const signUpSeller = async (signupData : IUser) => {
 };
 
 export const signIn = async (signupData : SignInUser) => {
-  let uri = 'user/signin';
+  console.log('signupData',signupData)
+  let uri = '/signIn';
   try {
     const res = await axios.post(uri, signupData);
     return res.data;
@@ -124,17 +128,20 @@ const subscribeNewLetter = async (data: any) => {
 }
 
 const verifyEmailOTP = async (data:any) => {
-  let uri = 'user/email-verification';
+  let uri = baseURL+'user/email-verification';
   try {
-    const res = await axios.post(uri, {otp : data.otp , email : data.email});
+    const res = await axios.post(uri, data);
+    console.log('verifyEmailOTP',res.data)
+
     return res.data;
-  } catch (e) {
-    throw e;
+  } catch (e:any){
+    console.log('verifyEmailOTP',e.response)
+    return e.response;
   }
 }
 
 export {
-  signUpBuyer,
+  signUp,
   signUpSeller,
   checkEmail,
   tokenVerification,
