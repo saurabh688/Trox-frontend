@@ -9,6 +9,7 @@ import Order from "../pages/order/Order";
 import ProductDetails from "../pages/productDetails/ProductDetails";
 import * as types from "../types";
 import ROUTE_PATHS from "./routesPath";
+import CheckoutProcess from "../pages/checkout/Checkout";
 // const Cart = React.lazy(() => import("../pages/cart/Cart"));
 // const Home = React.lazy(() => import("../pages/home/Home"));
 // const Listing = React.lazy(() => import("../pages/lisitng/Listing"));
@@ -63,6 +64,11 @@ const routes: types.route[] = [
   {
     path: ROUTE_PATHS.REGISTRATIONOTP,
     component: <RegistrarionOtp />,
+    exact: true,
+  },
+  {
+    path: ROUTE_PATHS.CHECKOUT_PROCESS,
+    component: <CheckoutProcess/>,
     exact: true,
   },
 ];
