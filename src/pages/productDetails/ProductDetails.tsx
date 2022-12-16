@@ -24,7 +24,7 @@ const ProductDetails = () => {
       window.localStorage.setItem("cart", JSON.stringify(productDetailsValue));
     }
 
-    // navigate("/cart", { state: { productDetailsValue } });
+    navigate("/cart", { state: { productDetailsValue } });
   };
 
   useEffect(() => {
@@ -124,7 +124,7 @@ const ProductDetails = () => {
           <br />
           {/* <!-- Product Pricing --> */}
           <div className="product-price">
-            <span>{productDetailsValue?.salePrice}</span>
+          <strong>{"$"+productDetailsValue?.price}</strong>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" className="cart-btn" onClick={addToCart}>
               Add to cart
             </a>
