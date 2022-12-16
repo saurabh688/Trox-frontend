@@ -5,28 +5,19 @@ import React, { useState } from "react";
 // import "./style.css";
 import doorSVG from "./images/door.svg";
 import cartSVG from "./images/cart.svg";
+import { useDispatch } from "react-redux";
+import { loginStart } from "../../redux/reduxSlice/user";
 
 const Login = () => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
   const signIn = (e: any) => {
     e.preventDefault();
-
-    console.log("dfsadfsa");
-    navigate("/", { replace: true });
-    // let uri = "https://52.54.44.196/api/v1/signIn";
-    // try {
-    //   const res = await axios.post(uri, {
-    //     emailID: userName,
-    //     password: passwordValue,
-    //   });
-    //   console.log("rerewrew", res);
-    //   return res.data;
-    // } catch (e) {
-    //   throw e;
-    // }
+    console.log("userName", userName, passwordValue);
+    dispatch(loginStart({ emailID: userName, password: passwordValue }));
   };
 
   return (
@@ -37,7 +28,7 @@ const Login = () => {
           <img src={cartSVG} />
         </div>
         <div className="login-content">
-          <form className="form" action="index.html">
+          <form className="form">
             <img src={doorSVG} />
 
             <h2 className="title">Trox Sign-In</h2>
@@ -46,7 +37,14 @@ const Login = () => {
                 <i className="fas fa-user"></i>
               </div>
               <div className="div">
-                <input type="text" className="input" placeholder="Username" />
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Username"
+                  onInput={(e: any) => {
+                    setUserName(e.target.value);
+                  }}
+                />
               </div>
             </div>
             <div className="input-div pass">
@@ -58,6 +56,9 @@ const Login = () => {
                   type="password"
                   className="input"
                   placeholder="Password"
+                  onInput={(e: any) => {
+                    setPasswordValue(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -68,7 +69,14 @@ const Login = () => {
               value="Login"
               onClick={signIn}
             />
-            <input type="submit" className="btn" value="Register" />
+            <input
+              type="button"
+              className="btn"
+              onClick={() => {
+                navigate("/register");
+              }}
+              value="Register"
+            />
           </form>
         </div>
       </div>

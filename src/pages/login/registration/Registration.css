@@ -1,0 +1,21 @@
+.registraion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registraion-layout {
+    border: 2px solid rgb(205, 200, 200);
+    box-shadow: 2px 2px rgb(187, 184, 184);
+    border-radius: 4px;
+    margin-top: 40px;
+    padding: 24px;
+    text-align: center;
+}
+
+#registration-name,
+#registration-email,
+#registration-mobile,
+#registration-password {
+    width: 400px;
+}

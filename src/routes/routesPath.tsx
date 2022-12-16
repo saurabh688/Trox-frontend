@@ -5,6 +5,8 @@ const ROUTE_PATHS = {
   PRODUCT_DETAILS: "/product-details",
   ORDER: "/order",
   CART: "/cart",
+  REGISTRATION: "/register",
+  REGISTRATIONOTP: "/verification",
 };
 
 export default ROUTE_PATHS;

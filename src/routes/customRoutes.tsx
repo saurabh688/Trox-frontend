@@ -13,7 +13,9 @@ const CustomRoutes: React.FC = () => {
               key={path}
               element={
                 <>
-                  {path === "/login" ? (
+                  {path === "/login" ||
+                  path === "/register" ||
+                  path === "/verification" ? (
                     component
                   ) : (
                     <>
